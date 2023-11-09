@@ -15,16 +15,13 @@ export class GithubService {
     page: number,
   ): Observable<GitHubCommit[]> {
     return this.httpService
-      .get<GitHubCommit[]>(
-        `https://api.github.com/repos/${username}/${repo}/commits`,
-        {
-          params: {
-            sha: branch,
-            per_page: limit,
-            page,
-          },
+      .get<GitHubCommit[]>(`/repos/${username}/${repo}/commits`, {
+        params: {
+          sha: branch,
+          per_page: limit,
+          page,
         },
-      )
+      })
       .pipe(
         map((response) => response.data),
         catchError((error) => {

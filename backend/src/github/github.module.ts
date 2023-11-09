@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
   imports: [
     HttpModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
+        baseURL: 'https://api.github.com',
         headers: {
           Authorization: `Bearer ${configService.get('GITHUB_TOKEN')}`,
           'X-Github-Api-Version': '2022-11-28',
