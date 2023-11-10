@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { GithubService } from './github.service';
 import { HttpModule } from '@nestjs/axios';
-import { GithubController } from './github.controller';
+import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
+import { GithubController } from './github.controller';
+import { GithubService } from './github.service';
 
 @Module({
   imports: [

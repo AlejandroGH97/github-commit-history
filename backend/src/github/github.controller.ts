@@ -1,4 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+
 import { GithubService } from './github.service';
 
 @Controller({ path: 'github/repos' })

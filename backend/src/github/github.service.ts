@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Observable, catchError, map } from 'rxjs';
+
 import { GitHubCommit } from './github.interface';
 
 @Injectable()
