@@ -15,10 +15,14 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/github/repos/:username/:repo/commits (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/github/repos/alejandrogh97/github-commit-history/commits')
       .expect(200)
-      .expect('Hello World!');
+      .expect('Content-Type', /json/);
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 });
