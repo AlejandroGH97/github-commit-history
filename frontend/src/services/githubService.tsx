@@ -1,6 +1,8 @@
-import { GitHubCommit, SearchParams } from "../types/commit";
+import { GitHubCommit, SearchParams } from '../types/commit';
 
 export const fetchCommits = async (params: SearchParams) => {
+  const baseURL: string = import.meta.env.VITE_BACKEND_URL;
+
   const { author, repo, branch, page, limit } = params;
   if (!author || !repo) {
     return [];
@@ -11,7 +13,7 @@ export const fetchCommits = async (params: SearchParams) => {
     limit: limit!.toString(),
   });
   const response = await fetch(
-    `http://localhost:3000/github/repos/${author}/${repo}/commits?${query}`
+    `${baseURL}/github/repos/${author}/${repo}/commits?${query}`
   );
   if (!response.ok) {
     return [];
