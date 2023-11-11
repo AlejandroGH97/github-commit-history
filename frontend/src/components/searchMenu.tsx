@@ -67,6 +67,19 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
       </div>
 
       <div className="flex space-x-2">
+        <div className="flex flex-col w-1/2">
+          <label className="text-left">Author:</label>
+          <input
+            autoComplete="off"
+            required
+            type="text"
+            name="author"
+            value={searchParams.author}
+            onChange={handleChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            placeholder="Enter author"
+          />
+        </div>
         <div className="flex flex-col w-1/4">
           <label className="text-left">Limit:</label>
           <input
@@ -85,19 +98,6 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
             value={searchParams.page}
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div className="flex flex-col w-1/2">
-          <label className="text-left">Author:</label>
-          <input
-            autoComplete="off"
-            required
-            type="text"
-            name="author"
-            value={searchParams.author}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded"
-            placeholder="Enter author"
           />
         </div>
       </div>
