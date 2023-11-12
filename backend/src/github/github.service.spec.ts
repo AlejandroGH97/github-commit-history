@@ -83,4 +83,55 @@ describe('GithubService', () => {
       },
     );
   });
+
+  it('should return an array of branches', (done) => {
+    const mockBranches: GitHubCommit[] = mockGitHubCommits;
+    jest
+      .spyOn(httpService, 'get')
+      .mockImplementation(() => of({ data: mockBranches } as AxiosResponse));
+
+    service.getBranches('username', 'repo').subscribe({
+      next: (branches) => {
+        expect(branches).toEqual(mockBranches);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should throw a NotFoundException for an invalid repository', (done) => {
+    jest.spyOn(httpService, 'get').mockImplementation(() =>
+      throwError(() => ({
+        response: { status: HttpStatus.NOT_FOUND },
+      })),
+    );
+
+    service.getBranches('not-found', 'repo').subscribe(
+      () =>
+        done.fail('Expected method to throw HttpException, but it did not.'),
+      (error) => {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+        done();
+      },
+    );
+  });
+
+  it('should throw an InternalServerErrorException for other errors', (done) => {
+    jest.spyOn(httpService, 'get').mockImplementation(() =>
+      throwError(() => ({
+        response: { status: HttpStatus.INTERNAL_SERVER_ERROR },
+      })),
+    );
+
+    service.getBranches('username', 'repo').subscribe(
+      () =>
+        done.fail('Expected method to throw HttpException, but it did not.'),
+      (error) => {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+        done();
+      },
+    );
+  });
 });

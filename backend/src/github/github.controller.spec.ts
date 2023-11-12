@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { of } from 'rxjs';
 
 import { GithubController } from './github.controller';
-import { GitHubCommit } from './github.interface';
+import { GitHubBranch, GitHubCommit } from './github.interface';
 import { GithubService } from './github.service';
-import { mockGitHubCommits } from '../mocks/github.mocks';
+import { mockGitHubBranches, mockGitHubCommits } from '../mocks/github.mocks';
 
 describe('GithubController', () => {
   let controller: GithubController;
@@ -18,6 +18,7 @@ describe('GithubController', () => {
           provide: GithubService,
           useValue: {
             getCommits: jest.fn(),
+            getBranches: jest.fn(),
           },
         },
       ],
@@ -57,5 +58,22 @@ describe('GithubController', () => {
       limit,
       page,
     );
+  });
+
+  it('should call getBranches on GithubService with correct parameters', (done) => {
+    const mockBranches: GitHubBranch[] = mockGitHubBranches;
+    jest
+      .spyOn(githubService, 'getBranches')
+      .mockImplementation(() => of(mockBranches));
+
+    const username = 'testUser';
+    const repo = 'testRepo';
+
+    controller.getBranches(username, repo).subscribe((data) => {
+      expect(data).toEqual(mockBranches);
+      done();
+    });
+
+    expect(githubService.getBranches).toHaveBeenCalledWith(username, repo);
   });
 });
