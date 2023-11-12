@@ -87,3 +87,78 @@ export const mockGitHubCommits = [
     ],
   },
 ];
+
+export const mockGitHubBranches = [
+  {
+    name: 'dev',
+    commit: {
+      sha: 'ac9924b6c1372b781e4d4e3ae13bfb75597910e9',
+      url: 'https://api.github.com/repos/AlejandroGH97/github-commit-history/commits/ac9924b6c1372b781e4d4e3ae13bfb75597910e9',
+    },
+    protected: true,
+    protection: {
+      enabled: true,
+      required_status_checks: {
+        enforcement_level: 'off',
+        contexts: [],
+        checks: [],
+      },
+    },
+    protection_url:
+      'https://api.github.com/repos/AlejandroGH97/github-commit-history/branches/dev/protection',
+  },
+  {
+    name: 'feat/api-endpoints',
+    commit: {
+      sha: 'bf420e60ff9362e5cc585bfb078082972d3fc136',
+      url: 'https://api.github.com/repos/AlejandroGH97/github-commit-history/commits/bf420e60ff9362e5cc585bfb078082972d3fc136',
+    },
+    protected: false,
+    protection: {
+      enabled: false,
+      required_status_checks: {
+        enforcement_level: 'off',
+        contexts: [],
+        checks: [],
+      },
+    },
+    protection_url:
+      'https://api.github.com/repos/AlejandroGH97/github-commit-history/branches/feat/api-endpoints/protection',
+  },
+  {
+    name: 'feat/frontend-commits-view',
+    commit: {
+      sha: 'e46c59611cf27df520a6af4707024cc857ed0cf4',
+      url: 'https://api.github.com/repos/AlejandroGH97/github-commit-history/commits/e46c59611cf27df520a6af4707024cc857ed0cf4',
+    },
+    protected: false,
+    protection: {
+      enabled: false,
+      required_status_checks: {
+        enforcement_level: 'off',
+        contexts: [],
+        checks: [],
+      },
+    },
+    protection_url:
+      'https://api.github.com/repos/AlejandroGH97/github-commit-history/branches/feat/frontend-commits-view/protection',
+  },
+  {
+    name: 'main',
+    commit: {
+      sha: 'a47af28cddf9da0924fa3611a2208788bc4a13d3',
+      url: 'https://api.github.com/repos/AlejandroGH97/github-commit-history/commits/a47af28cddf9da0924fa3611a2208788bc4a13d3',
+    },
+    protected: false,
+    protection: {
+      enabled: false,
+      required_status_checks: {
+        enforcement_level: 'off',
+        contexts: [],
+        checks: [],
+      },
+    },
+    protection_url:
+      'https://api.github.com/repos/AlejandroGH97/github-commit-history/branches/main/protection',
+  },
+];

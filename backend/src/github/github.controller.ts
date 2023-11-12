@@ -16,4 +16,12 @@ export class GithubController {
   ) {
     return this.githubService.getCommits(username, repo, branch, limit, page);
   }
+
+  @Get(':username/:repo/branches')
+  getBranches(
+    @Param('username') username: string,
+    @Param('repo') repo: string,
+  ) {
+    return this.githubService.getBranches(username, repo);
+  }
 }
