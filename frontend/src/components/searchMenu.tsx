@@ -62,37 +62,6 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
           placeholder="Enter repository"
         />
       </div>
-      <div className="flex flex-col">
-        <label className="text-left">Branch (optional):</label>
-        <div className="flex space-x-2">
-          <div className="flex w-full">
-            <input
-              type="text"
-              name="branch"
-              list="branch-list"
-              value={searchParams.branch}
-              onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded"
-              placeholder="Enter branch"
-            />
-            <datalist id="branch-list">
-              {branches.map((branch, index) => (
-                <option key={index} value={branch.name} />
-              ))}
-            </datalist>
-          </div>
-          <div className="flex w-24">
-            <button
-              type="button"
-              onClick={handleFetchBranches}
-              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              Fetch
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className="flex space-x-2">
         <div className="flex flex-col w-1/2">
           <label className="text-left">Author:</label>
@@ -125,6 +94,36 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
             onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded"
           />
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <label className="text-left">Branch (optional):</label>
+        <div className="flex space-x-2">
+          <div className="flex w-full">
+            <input
+              type="text"
+              name="branch"
+              list="branch-list"
+              value={searchParams.branch}
+              onChange={handleChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              placeholder="Enter branch"
+            />
+            <datalist id="branch-list">
+              {branches.map((branch, index) => (
+                <option key={index} value={branch.name} />
+              ))}
+            </datalist>
+          </div>
+          <div className="flex w-24">
+            <button
+              type="button"
+              onClick={handleFetchBranches}
+              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Fetch
+            </button>
+          </div>
         </div>
       </div>
 
