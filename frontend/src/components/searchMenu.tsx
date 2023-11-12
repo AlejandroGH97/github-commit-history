@@ -51,10 +51,13 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
       className="flex flex-col space-y-4 mb-5 p-4 bg-gray-700 rounded shadow-lg min-w-[500px]"
     >
       <div className="flex flex-col">
-        <label className="text-left">Repository:</label>
+        <label htmlFor="repo" className="text-left">
+          Repository:
+        </label>
         <input
           required
           type="text"
+          id="repo"
           name="repo"
           value={searchParams.repo}
           onChange={handleChange}
@@ -64,10 +67,13 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
       </div>
       <div className="flex space-x-2">
         <div className="flex flex-col w-1/2">
-          <label className="text-left">Author:</label>
+          <label htmlFor="author" className="text-left">
+            Author:
+          </label>
           <input
             required
             type="text"
+            id="author"
             name="author"
             value={searchParams.author}
             onChange={handleChange}
@@ -76,9 +82,12 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
           />
         </div>
         <div className="flex flex-col w-1/4">
-          <label className="text-left">Limit:</label>
+          <label htmlFor="limit" className="text-left">
+            Limit:
+          </label>
           <input
             type="number"
+            id="limit"
             name="limit"
             value={searchParams.limit}
             onChange={handleChange}
@@ -86,9 +95,12 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
           />
         </div>
         <div className="flex flex-col w-1/4">
-          <label className="text-left">Page:</label>
+          <label htmlFor="page" className="text-left">
+            Page:
+          </label>
           <input
             type="number"
+            id="page"
             name="page"
             value={searchParams.page}
             onChange={handleChange}
@@ -97,11 +109,14 @@ const SearchMenu: React.FC<SearchMenuProps> = ({
         </div>
       </div>
       <div className="flex flex-col">
-        <label className="text-left">Branch (optional):</label>
+        <label htmlFor="branch" className="text-left">
+          Branch (optional):
+        </label>
         <div className="flex space-x-2">
           <div className="flex w-full">
             <input
               type="text"
+              id="branch"
               name="branch"
               list="branch-list"
               value={searchParams.branch}
