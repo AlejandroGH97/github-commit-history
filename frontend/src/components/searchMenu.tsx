@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { GitHubBranch } from "../types/branches";
 
 interface SearchParams {
   repo: string;
@@ -10,13 +11,19 @@ interface SearchParams {
 
 interface SearchMenuProps {
   onSearch: (params: SearchParams) => void;
+  branches: GitHubBranch[];
+  onFetchBranches: (params: SearchParams) => void;
 }
 
-const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
+const SearchMenu: React.FC<SearchMenuProps> = ({
+  onSearch,
+  onFetchBranches,
+  branches = [],
+}) => {
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    repo: '',
-    branch: '',
-    author: '',
+    repo: "",
+    branch: "",
+    author: "",
     page: 1,
     limit: 10,
   });
@@ -25,13 +32,17 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
     const { name, value, type } = e.target;
     setSearchParams({
       ...searchParams,
-      [name]: type === 'number' ? parseInt(value) || 1 : value,
+      [name]: type === "number" ? parseInt(value) || 1 : value,
     });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(searchParams);
+  };
+
+  const handleFetchBranches = () => {
+    onFetchBranches(searchParams);
   };
 
   return (
@@ -42,7 +53,6 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
       <div className="flex flex-col">
         <label className="text-left">Repository:</label>
         <input
-          autoComplete="off"
           required
           type="text"
           name="repo"
@@ -52,25 +62,41 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ onSearch }) => {
           placeholder="Enter repository"
         />
       </div>
-
       <div className="flex flex-col">
         <label className="text-left">Branch (optional):</label>
-        <input
-          autoComplete="off"
-          type="text"
-          name="branch"
-          value={searchParams.branch}
-          onChange={handleChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded"
-          placeholder="Enter branch"
-        />
+        <div className="flex space-x-2">
+          <div className="flex w-full">
+            <input
+              type="text"
+              name="branch"
+              list="branch-list"
+              value={searchParams.branch}
+              onChange={handleChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              placeholder="Enter branch"
+            />
+            <datalist id="branch-list">
+              {branches.map((branch, index) => (
+                <option key={index} value={branch.name} />
+              ))}
+            </datalist>
+          </div>
+          <div className="flex w-24">
+            <button
+              type="button"
+              onClick={handleFetchBranches}
+              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Fetch
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="flex space-x-2">
         <div className="flex flex-col w-1/2">
           <label className="text-left">Author:</label>
           <input
-            autoComplete="off"
             required
             type="text"
             name="author"
