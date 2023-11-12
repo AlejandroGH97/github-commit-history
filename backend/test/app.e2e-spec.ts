@@ -22,6 +22,13 @@ describe('AppController (e2e)', () => {
       .expect('Content-Type', /json/);
   });
 
+  it('/github/repos/:username/:repo/branches (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/github/repos/alejandrogh97/github-commit-history/branches')
+      .expect(200)
+      .expect('Content-Type', /json/);
+  });
+
   afterAll(async () => {
     await app.close();
   });
