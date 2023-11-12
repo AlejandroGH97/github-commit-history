@@ -10,8 +10,8 @@ export const fetchCommits = async (params: SearchParams) => {
   }
   const query = new URLSearchParams({
     branch,
-    page: page!.toString(),
-    limit: limit!.toString(),
+    page: page.toString(),
+    limit: limit.toString(),
   });
   const response = await fetch(
     `${baseURL}/github/repos/${author}/${repo}/commits?${query}`
@@ -21,7 +21,6 @@ export const fetchCommits = async (params: SearchParams) => {
   }
 
   const commits: GitHubCommit[] = await response.json();
-  console.log(commits);
 
   return commits;
 };
@@ -41,7 +40,6 @@ export const fetchBranches = async (params: SearchParams) => {
   }
 
   const branches: GitHubBranch[] = await response.json();
-  console.log(branches);
 
   return branches;
 };
